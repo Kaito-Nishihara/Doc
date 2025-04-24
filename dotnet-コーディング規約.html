@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>dotnet-コーディング規約.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E8%A6%8F%E7%B4%84">コーディング規約</h1>
+<p>.NET C# の<a href="https://learn.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/coding-conventions">公式スタイルガイド</a>に準拠する。<br>
+本ドキュメントでは、スタイルガイド内で意見が分かれる点や、プロジェクト固有の規約について明記する。</p>
+<h2 id="%E7%9B%AE%E6%AC%A1">目次</h2>
+<ul>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E8%A6%8F%E7%B4%84">コーディング規約</a>
+<ul>
+<li><a href="#%E7%9B%AE%E6%AC%A1">目次</a></li>
+<li><a href="#1-%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87">1 命名規則</a>
+<ul>
+<li><a href="#11-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%91%BD%E5%90%8D">1.1 ファイルの命名</a>
+<ul>
+<li><a href="#%E4%BE%8B">例：</a></li>
+</ul>
+</li>
+<li><a href="#12-%E5%90%8D%E5%89%8D%E3%81%AE%E4%BB%98%E3%81%91%E6%96%B9">1.2 名前の付け方</a></li>
+</ul>
+</li>
+<li><a href="#2-%E3%82%B3%E3%83%BC%E3%83%89%E8%A8%98%E8%BF%B0%E4%B8%8A%E3%81%AE%E8%A6%8F%E7%B4%84">2 コード記述上の規約</a>
+<ul>
+<li><a href="#21-var-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">2.1 var を使用する</a></li>
+<li><a href="#22-null-%E5%88%A4%E5%AE%9A%E3%81%AF-is-null-%E3%82%92%E4%BD%BF%E3%81%86">2.2 null 判定は is null を使う</a></li>
+<li><a href="#23-%E5%BC%8F%E4%BD%93%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E6%A7%8B%E6%96%87%E3%82%92%E4%BD%BF%E3%81%86">2.3 式体メンバー構文を使う</a></li>
+<li><a href="#24-switch-%E5%BC%8F%E3%81%AE%E6%B4%BB%E7%94%A8">2.4 switch 式の活用</a></li>
+<li><a href="#25-nameof-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">2.5 nameof() を使用する</a></li>
+<li><a href="#26-%E3%83%97%E3%83%A9%E3%82%A4%E3%83%9E%E3%83%AA%E3%83%BC%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E5%AE%A3%E8%A8%80%E3%81%99%E3%82%8B">2.6 プライマリーコンストラクタ宣言する</a></li>
+<li><a href="#27-%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88">2.7 コメント</a></li>
+<li><a href="#28-%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0%E3%81%AE%E6%B4%BB%E7%94%A8">2.8 パターンマッチングの活用</a></li>
+<li><a href="#210-%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%AF%E3%82%A4%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3">2.10 コレクション初期化はインライン</a></li>
+<li><a href="#211-linq%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%AF%E5%8F%AF%E8%AA%AD%E6%80%A7%E3%82%92%E5%84%AA%E5%85%88%E3%81%99%E3%82%8B">2.11 LINQクエリは可読性を優先する</a></li>
+<li><a href="#213-toarray-%E3%81%AF%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%82%92%E9%87%8D%E8%A6%96%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">2.13 <code>ToArray()</code> はパフォーマンスを重視する場合に使用する</a></li>
+</ul>
+</li>
+<li><a href="#3-%E8%A8%AD%E8%A8%88%E5%8E%9F%E5%89%87">3 設計原則</a>
+<ul>
+<li><a href="#31-%E4%BE%9D%E5%AD%98%E6%80%A7%E9%80%86%E8%BB%A2%E3%81%AE%E5%8E%9F%E5%89%87dip">3.1 依存性逆転の原則（DIP）</a></li>
+<li><a href="#32-%E5%8D%98%E4%B8%80%E8%B2%AC%E4%BB%BB%E3%81%AE%E5%8E%9F%E5%89%87srp">3.2 単一責任の原則（SRP）</a></li>
+<li><a href="#33-%E9%96%8B%E6%94%BE%E9%96%89%E9%8E%96%E5%8E%9F%E5%89%87ocp">3.3 開放/閉鎖原則（OCP）</a></li>
+<li><a href="#34-%E3%83%AA%E3%82%B9%E3%82%B3%E3%83%95%E3%81%AE%E7%BD%AE%E6%8F%9B%E5%8E%9F%E5%89%87lsp">3.4 リスコフの置換原則（LSP）</a></li>
+<li><a href="#35-%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9%E5%88%86%E9%9B%A2%E5%8E%9F%E5%89%87isp">3.5 インターフェース分離原則（ISP）</a></li>
+</ul>
+</li>
+<li><a href="#4-%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E8%A8%AD%E8%A8%88">4 コントローラー設計</a>
+<ul>
+<li><a href="#41-%E5%90%84%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AF-1-%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AB%E8%B2%AC%E5%8B%99%E3%82%92%E9%99%90%E5%AE%9A%E3%81%99%E3%82%8B%E4%BE%8Busercontroller">4.1 各コントローラーは <strong>1</strong> ドメインに責務を限定する（例：UserController）</a></li>
+<li><a href="#42-restful-%E3%81%AA%E5%91%BD%E5%90%8Dhttp-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E8%A8%AD%E8%A8%88%E3%82%92%E5%BE%B9%E5%BA%95%E3%81%99%E3%82%8B">4.2 RESTful な命名・HTTP メソッド設計を徹底する</a></li>
+<li><a href="#43-%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%AF-actionresult-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">4.3 戻り値は ActionResult を使用する</a></li>
+<li><a href="#44-%E9%9D%9E%E5%90%8C%E6%9C%9F%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AB%E3%81%AF%E5%BF%85%E3%81%9A-async-task-%E3%82%92%E4%BD%BF%E3%81%86">4.4 非同期メソッドには必ず async Task を使う</a></li>
+<li><a href="#45-http-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%B1%9E%E6%80%A7%E3%81%AF%E5%BF%85%E3%81%9A%E6%98%8E%E7%A4%BA%E7%9A%84%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%99%E3%82%8B">4.5 HTTP メソッド属性は必ず明示的に記載する</a></li>
+<li><a href="#46--uri%E8%A8%AD%E8%A8%88%E3%81%AF%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E6%8C%87%E5%90%91%E3%82%92%E6%84%8F%E8%AD%98%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E5%8B%95%E8%A9%9E%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84">4.6  URI設計はリソース指向を意識すること（動詞を使わない）</a></li>
+</ul>
+</li>
+<li><a href="#5-http%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E8%A8%AD%E8%A8%88">5 HTTPステータスコードの設計</a>
+<ul>
+<li><a href="#51-200-ok-%E9%80%9A%E5%B8%B8%E6%88%90%E5%8A%9F%E6%99%82">5.1 <code>200 OK</code>: 通常成功時</a></li>
+<li><a href="#52-201-created-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E4%BD%9C%E6%88%90%E6%88%90%E5%8A%9F%E6%99%82">5.2 <code>201 Created</code>: リソース作成成功時</a></li>
+<li><a href="#53-204-no-content-%E6%9B%B4%E6%96%B0%E5%89%8A%E9%99%A4%E6%88%90%E5%8A%9F%E3%83%AC%E3%82%B9%E3%83%9D%E3%83%B3%E3%82%B9%E3%83%9C%E3%83%87%E3%82%A3%E3%81%AA%E3%81%97">5.3 <code>204 No Content</code>: 更新・削除成功（レスポンスボディなし）</a></li>
+<li><a href="#54-400-bad-request-%E5%85%A5%E5%8A%9B%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%A4%B1%E6%95%97">5.4 <code>400 Bad Request</code>: 入力エラー・バリデーション失敗</a></li>
+<li><a href="#55-404-not-found-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%AA%E3%81%84">5.5 <code>404 Not Found</code>: リソースが存在しない</a></li>
+<li><a href="#56-500-internal-server-error-%E4%BA%88%E6%9C%9F%E3%81%97%E3%81%AA%E3%81%84%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%A8%E3%83%A9%E3%83%BC">5.6 <code>500 Internal Server Error</code>: 予期しないサーバーエラー</a></li>
+</ul>
+</li>
+<li><a href="#6-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E8%A8%AD%E8%A8%88">6 サービス・リポジトリ設計</a>
+<ul>
+<li><a href="#61-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%B1%A4%E3%81%AF%E6%A5%AD%E5%8B%99%E5%87%A6%E7%90%86%E3%81%AE%E3%81%BF%E3%82%92%E5%AE%9F%E8%A3%85">6.1 サービス層は業務処理のみを実装</a></li>
+<li><a href="#62-%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E5%B1%A4%E3%81%AF-db-%E3%81%B8%E3%81%AE%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D%E6%93%8D%E4%BD%9C%E3%81%AE%E3%81%BF%E3%82%92%E5%AE%9F%E8%A3%85">6.2 リポジトリ層は DB への読み書き操作のみを実装</a></li>
+</ul>
+</li>
+<li><a href="#7-%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">7 バリデーション</a>
+<ul>
+<li><a href="#71-%E5%8D%98%E9%A0%85%E7%9B%AE%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">7.1 単項目バリデーション</a></li>
+<li><a href="#72-%E6%A5%AD%E5%8B%99%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">7.2 業務バリデーション</a></li>
+</ul>
+</li>
+<li><a href="#8-%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0">8 エラーハンドリング</a>
+<ul>
+<li><a href="#81-throw-%E3%81%AE%E4%BD%BF%E7%94%A8%E8%A6%8F%E7%B4%84">8.1 throw の使用規約</a>
+<ul>
+<li><a href="#-throw-%E3%81%8C%E8%A8%B1%E5%AE%B9%E3%81%95%E3%82%8C%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9">✅ throw が許容されるケース</a></li>
+<li><a href="#-throw-%E3%82%92%E9%81%BF%E3%81%91%E3%82%8B%E3%81%B9%E3%81%8D%E3%82%B1%E3%83%BC%E3%82%B9">❌ throw を避けるべきケース</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#9-%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC">9 フィルター</a>
+<ul>
+<li><a href="#91-%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC%E3%81%AE%E4%BD%BF%E7%94%A8%E8%A6%8F%E7%B4%84">9.1 フィルターの使用規約</a></li>
+</ul>
+</li>
+<li><a href="#10-%E5%85%B1%E9%80%9A%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%83%A9%E3%82%B9commons--helper">10 共通ユーティリティクラス（Commons / Helper）</a>
+<ul>
+<li><a href="#101-commons">10.1 Commons</a></li>
+<li><a href="#102-helper">10.2 Helper</a></li>
+</ul>
+</li>
+<li><a href="#11-%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2%E5%88%B6%E9%99%90%E4%BA%8B%E9%A0%85%E7%A6%81%E6%AD%A2%E7%B3%BB%E8%A6%8F%E7%B4%84">11 使用禁止・制限事項（禁止系規約）</a>
+<ul>
+<li><a href="#111-linq-%E3%82%AF%E3%82%A8%E3%83%AA%E5%86%85%E3%81%A7%E3%81%AE-datetimenow-%E3%81%AE%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2">11.1 Linq クエリ内での <code>DateTime.Now</code> の直接使用禁止</a></li>
+<li><a href="#112-asenumerable-%E3%81%AE%E4%BD%BF%E7%94%A8%E3%82%92%E5%8E%9F%E5%89%87%E7%A6%81%E6%AD%A2%E3%81%A8%E3%81%99%E3%82%8B">11.2 <code>AsEnumerable()</code> の使用を原則禁止とする</a></li>
+<li><a href="#113-dynamic-%E3%81%AE%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2">11.3 <code>dynamic</code> の使用禁止</a></li>
+<li><a href="#114-object-%E3%81%AE%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%E9%81%8B%E7%94%A8%E3%81%AE%E7%A6%81%E6%AD%A2">11.4 <code>object</code> のキャスト運用の禁止</a></li>
+<li><a href="#115-async-void-%E3%81%AE%E7%A6%81%E6%AD%A2">11.5 <code>async void</code> の禁止</a></li>
+<li><a href="#116-throw-ex-%E3%81%AE%E7%A6%81%E6%AD%A2%E4%BE%8B%E5%A4%96%E3%81%AE%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B9%E7%A0%B4%E6%A3%84">11.6 <code>throw ex;</code> の禁止（例外のスタックトレース破棄）</a></li>
+<li><a href="#117-catchexception-%E3%81%AE%E6%BF%AB%E7%94%A8%E7%A6%81%E6%AD%A2">11.7 <code>catch(Exception)</code> の濫用禁止</a></li>
+<li><a href="#118-tolist%E3%81%AF%E5%BF%85%E8%A6%81%E3%81%AA%E6%99%82%E3%81%A0%E3%81%91%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">11.8 <code>ToList()</code>は必要な時だけ使用する。</a></li>
+<li><a href="#119-thread-%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2">11.9 <code>Thread</code> クラスの直接使用禁止</a></li>
+<li><a href="#1110-%E6%B7%B1%E3%81%99%E3%81%8E%E3%82%8B%E3%83%8D%E3%82%B9%E3%83%88%E3%81%AE%E7%A6%81%E6%AD%A2">11.10 深すぎるネストの禁止</a></li>
+<li><a href="#1111-if-condition-return-else-return-%E3%81%AE%E7%A6%81%E6%AD%A2">11.11 <code>if (condition) return; else return;</code> の禁止</a></li>
+<li><a href="#1112-if-x--true--if-x--false-%E3%81%AE%E7%A6%81%E6%AD%A2">11.12 <code>if (x == true)</code> / <code>if (x == false)</code> の禁止</a></li>
+<li><a href="#1113-%E6%A4%9C%E7%B4%A2%E7%B3%BB%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%A7%E5%85%A8%E4%BB%B6db%E3%81%8B%E3%82%89%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E7%A6%81%E6%AD%A2">11.13 検索系クエリで全件DBから取得することの禁止</a>
+<ul>
+<li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85">注意事項</a></li>
+</ul>
+</li>
+<li><a href="#1114-include-%E3%81%AE%E5%A4%9A%E7%94%A8%E8%AA%A4%E7%94%A8%E7%A6%81%E6%AD%A2">11.14 <code>Include()</code> の多用・誤用禁止</a></li>
+<li><a href="#1115-null-%E8%A8%B1%E5%AE%B9%E5%9E%8B%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B-null%E8%A8%B1%E5%8F%AF%E6%BC%94%E7%AE%97%E5%AD%90%E3%81%AE%E5%8E%9F%E5%89%87%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2">11.15 <code>null</code> 許容型に対する <code>!</code>（null許可演算子）の原則使用禁止</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1-%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87">1 命名規則</h2>
+<h3 id="11-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%91%BD%E5%90%8D">1.1 ファイルの命名</h3>
+<ul>
+<li>
+<p>C# のスタイルガイドに準じて、<strong>PascalCase</strong> を使用する。</p>
+</li>
+<li>
+<p>クラスとファイルは 1:1 で対応し、<strong>ファイル名 = クラス名</strong> とする。</p>
+<ul>
+<li>例外として、インターフェースは同一ファイル内に併記してもよい（例：<code>IUserService</code> と <code>UserService</code>）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="%E4%BE%8B">例：</h4>
+<table>
+<thead>
+<tr>
+<th>ファイル名</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UserController.cs</td>
+<td>ユーザー API コントローラー</td>
+</tr>
+<tr>
+<td>UserService.cs</td>
+<td>ユーザーのビジネスロジック</td>
+</tr>
+<tr>
+<td>UserRepository.cs</td>
+<td>データアクセス層</td>
+</tr>
+<tr>
+<td>UserDto.cs</td>
+<td>ユーザー DTO</td>
+</tr>
+<tr>
+<td>ApiExceptionFilter.cs</td>
+<td>グローバル例外ハンドラ</td>
+</tr>
+<tr>
+<td>StringExtensions.cs</td>
+<td>文字列操作の拡張メソッド</td>
+</tr>
+<tr>
+<td>DateTimeHelper.cs</td>
+<td>日付ユーティリティ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-%E5%90%8D%E5%89%8D%E3%81%AE%E4%BB%98%E3%81%91%E6%96%B9">1.2 名前の付け方</h3>
+<ul>
+<li>
+<p><strong>クラス名</strong>：<code>PascalCase</code>（例：<code>UserService</code>）</p>
+</li>
+<li>
+<p><strong>メソッド名</strong>：<code>PascalCase</code>（例：<code>GetUserById()</code>）</p>
+</li>
+<li>
+<p><strong>ローカル変数・引数名</strong>：<code>camelCase</code>（例：<code>userId</code>）</p>
+</li>
+<li>
+<p><strong>インターフェース</strong>：<code>I</code> + <code>PascalCase</code>（例：<code>IUserService</code>）</p>
+</li>
+<li>
+<p><strong>非同期メソッド</strong>：<code>Async</code> サフィックス（例：<code>GetUserAsync()</code>）</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-%E3%82%B3%E3%83%BC%E3%83%89%E8%A8%98%E8%BF%B0%E4%B8%8A%E3%81%AE%E8%A6%8F%E7%B4%84">2 コード記述上の規約</h2>
+<ul>
+<li><strong>読みやすさ・簡潔さ</strong>を優先して記述すること。</li>
+<li><code>Visual Studio</code> 上のアナライザーで警告が出た場合は抑制回避せず <strong>リファクタリング</strong> を行う。</li>
+<li><code>IDE</code> のインフォメーション（提案）も無視せず可能な限り <strong>リファクタリング</strong> を行う。</li>
+</ul>
+<h3 id="21-var-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">2.1 var を使用する</h3>
+<ul>
+<li>ローカル変数は原則として <a href="https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/statements/declarations"><strong><code>var</code></strong></a> を使用して記述を簡潔にすること</li>
+</ul>
+<h3 id="22-null-%E5%88%A4%E5%AE%9A%E3%81%AF-is-null-%E3%82%92%E4%BD%BF%E3%81%86">2.2 null 判定は is null を使う</h3>
+<ul>
+<li><code>null</code> チェックには <code>== null</code> / <code>!= null</code> の代わりに、<code>is null</code> / <code>is not null</code> を使用すること</li>
+</ul>
+<h3 id="23-%E5%BC%8F%E4%BD%93%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E6%A7%8B%E6%96%87%E3%82%92%E4%BD%BF%E3%81%86">2.3 式体メンバー構文を使う</h3>
+<ul>
+<li>シンプルな <code>getter</code> や メソッド は式体メンバー構文を利用して簡潔に書く。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> FullName =&gt; <span class="hljs-string">$"<span class="hljs-subst">{FirstName}</span> <span class="hljs-subst">{LastName}</span>"</span>;
+</div></code></pre>
+<h3 id="24-switch-%E5%BC%8F%E3%81%AE%E6%B4%BB%E7%94%A8">2.4 switch 式の活用</h3>
+<ul>
+<li>条件分岐には <code>switch</code> 式（C# 8 以降）を積極的に使用し、冗長な if-else を避ける。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> role = user.Role <span class="hljs-keyword">switch</span>
+{
+    <span class="hljs-string">"admin"</span> =&gt; <span class="hljs-string">"管理者"</span>,
+    <span class="hljs-string">"user"</span> =&gt; <span class="hljs-string">"一般ユーザー"</span>,
+    _ =&gt; <span class="hljs-string">"未設定"</span>
+};
+</div></code></pre>
+<h3 id="25-nameof-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">2.5 nameof() を使用する</h3>
+<ul>
+<li>パラメータ名・プロパティ名をハードコーディングせず、<code>nameof()</code> を使用すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(<span class="hljs-keyword">nameof</span>(email));
+</div></code></pre>
+<h3 id="26-%E3%83%97%E3%83%A9%E3%82%A4%E3%83%9E%E3%83%AA%E3%83%BC%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E5%AE%A3%E8%A8%80%E3%81%99%E3%82%8B">2.6 プライマリーコンストラクタ宣言する</h3>
+<ul>
+<li>コンストラクタとフィールド定義を省略可能な <code>primary constructor</code> 構文を使用すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> class <span class="hljs-title">UserService</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> Email, <span class="hljs-keyword">string</span> Name</span>)</span> { }
+
+<span class="hljs-comment">// ❌ 悪い例 : 旧来の冗長な記法</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UserService</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Email { <span class="hljs-keyword">get</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UserService</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> email, <span class="hljs-keyword">string</span> name</span>)</span>
+    {
+        Email = email;
+        Name = name;
+    }
+}
+</div></code></pre>
+<h3 id="27-%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88">2.7 コメント</h3>
+<ul>
+<li><code>TODO</code> コメントには 期限の目安を明示する。</li>
+<li>XML ドキュメントコメント（<code>///</code>）は パブリックなクラス・メソッド・プロパティに必須とする。</li>
+</ul>
+<h3 id="28-%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0%E3%81%AE%E6%B4%BB%E7%94%A8">2.8 パターンマッチングの活用</h3>
+<ul>
+<li><code>is</code>, <code>switch</code>, <code>when</code> などのパターンマッチングを活用し、明示的なキャストや冗長な分岐を避ける。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例：is + 型パターン</span>
+<span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">is</span> User user)
+{
+    Console.WriteLine(user.Name);
+}
+
+<span class="hljs-comment">// ❌ 悪い例 : 明示的なキャスト + nullチェック（古典的な書き方）</span>
+<span class="hljs-keyword">if</span> (obj != <span class="hljs-literal">null</span> &amp;&amp; obj <span class="hljs-keyword">is</span> User)
+{
+    <span class="hljs-keyword">var</span> user = (User)obj; <span class="hljs-comment">// ← 明示的キャスト</span>
+    Console.WriteLine(user.Name);
+}
+
+
+<span class="hljs-comment">// ❌ 悪い例 : switchでの冗長な型判定 + キャスト</span>
+<span class="hljs-keyword">switch</span> (obj.GetType().Name)
+{
+    <span class="hljs-keyword">case</span> <span class="hljs-string">"Admin"</span>:
+        <span class="hljs-keyword">var</span> admin = (Admin)obj;
+        admin.ManageUsers();
+        <span class="hljs-keyword">break</span>;
+}
+</div></code></pre>
+<h3 id="210-%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%AF%E3%82%A4%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3">2.10 コレクション初期化はインライン</h3>
+<ul>
+<li>コレクションや辞書の初期化は可能な限りインラインで簡潔に記述する。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例</span>
+<span class="hljs-keyword">var</span> names = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt; { <span class="hljs-string">"山田"</span>, <span class="hljs-string">"佐藤"</span>, <span class="hljs-string">"鈴木"</span> };
+
+<span class="hljs-comment">// ❌ 悪い例 : 明示的に new したあとに Add で1件ずつ追加</span>
+<span class="hljs-keyword">var</span> names = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-keyword">string</span>&gt;();
+names.Add(<span class="hljs-string">"山田"</span>);
+names.Add(<span class="hljs-string">"佐藤"</span>);
+names.Add(<span class="hljs-string">"鈴木"</span>);
+
+</div></code></pre>
+<h3 id="211-linq%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%AF%E5%8F%AF%E8%AA%AD%E6%80%A7%E3%82%92%E5%84%AA%E5%85%88%E3%81%99%E3%82%8B">2.11 LINQクエリは可読性を優先する</h3>
+<ul>
+<li>クエリ式とメソッドチェーンは、可読性を基準に使い分ける。</li>
+<li></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例 : 中間変数を使うことで、意図が明確になり、テストやデバッグも容易。</span>
+<span class="hljs-keyword">var</span> activeUsers = users.Where(u =&gt; u.IsActive);
+<span class="hljs-keyword">var</span> orderedUsers = activeUsers.OrderBy(u =&gt; u.Name);
+<span class="hljs-keyword">var</span> result = orderedUsers.Select(u =&gt; <span class="hljs-keyword">new</span> { u.Id, u.Name }).ToList();
+
+
+<span class="hljs-comment">// ❌ 悪い例 : チェーンを過剰にネストして読みづらい</span>
+<span class="hljs-keyword">var</span> sorted = users.Where(u =&gt; u.IsActive).OrderBy(u =&gt; u.Name).Select(u =&gt; <span class="hljs-keyword">new</span> { u.Id, u.Name }).ToList();
+
+</div></code></pre>
+<h3 id="213-toarray-%E3%81%AF%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%82%92%E9%87%8D%E8%A6%96%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">2.13 <code>ToArray()</code> はパフォーマンスを重視する場合に使用する</h3>
+<ul>
+<li><code>ToArray()</code> は <code>ToList()</code> よりも軽量かつ高速にメモリ確保されるため、固定長の配列で十分なケースに限定して使用する</li>
+</ul>
+<h2 id="3-%E8%A8%AD%E8%A8%88%E5%8E%9F%E5%89%87">3 設計原則</h2>
+<h3 id="31-%E4%BE%9D%E5%AD%98%E6%80%A7%E9%80%86%E8%BB%A2%E3%81%AE%E5%8E%9F%E5%89%87dip">3.1 依存性逆転の原則（DIP）</h3>
+<ul>
+<li>依存関係の注入には <code>IServiceCollection</code> を使用し、<code>AddScoped</code> を基本とする。</li>
+<li>サービス層・リポジトリ層ともにインターフェース経由で注入し<strong>抽象に依存</strong>すること。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例</span>
+services.AddScoped&lt;IUserService, UserService&gt;();
+services.AddScoped&lt;IUserRepository, UserRepository&gt;();
+
+<span class="hljs-comment">// ❌ 悪い例 : 直接初期化</span>
+<span class="hljs-keyword">var</span> userService = <span class="hljs-keyword">new</span> UserService();
+</div></code></pre>
+<h3 id="32-%E5%8D%98%E4%B8%80%E8%B2%AC%E4%BB%BB%E3%81%AE%E5%8E%9F%E5%89%87srp">3.2 単一責任の原則（SRP）</h3>
+<ul>
+<li>各クラス・各レイヤーは<strong>一つの責務に限定</strong>すること。( たとえば、<strong>コントローラーは API の受け口としての責務のみを持ち、業務処理はサービスに委譲する。</strong>)</li>
+<li>SRP はサービス・リポジトリ層に限らず、あらゆる構成要素（<strong>Filter、Middleware、DTO など</strong>）に適用する設計の基本指針とする。</li>
+</ul>
+<h3 id="33-%E9%96%8B%E6%94%BE%E9%96%89%E9%8E%96%E5%8E%9F%E5%89%87ocp">3.3 開放/閉鎖原則（OCP）</h3>
+<ul>
+<li>コードの変更を伴わずに拡張できる設計を行うこと</li>
+<li>新しい機能追加や仕様変更が発生しても、既存のコードを変更せずに拡張可能な構造とする。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例 : switch 文や if-else による型分岐ではなく、ポリモーフィズム（継承やインターフェース）で処理を委譲する。</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">NotificationSender</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Send</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> message</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">EmailSender</span> : <span class="hljs-title">NotificationSender</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Send</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> message</span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">$"Email: <span class="hljs-subst">{message}</span>"</span>);
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SmsSender</span> : <span class="hljs-title">NotificationSender</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Send</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> message</span>)</span>
+    {
+        Console.WriteLine(<span class="hljs-string">$"SMS: <span class="hljs-subst">{message}</span>"</span>);
+    }
+}
+
+<span class="hljs-comment">// 利用側は抽象型で扱う</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> class <span class="hljs-title">NotificationService</span>(<span class="hljs-params">NotificationSender sender</span>)</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Notify</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> message</span>)</span>
+    {
+        _sender.Send(message);
+    }
+}
+
+<span class="hljs-comment">// ❌ 悪い例 : 条件分岐が増え続ける</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">NotificationService</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Notify</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> message, <span class="hljs-keyword">string</span> type</span>)</span>
+    {
+        <span class="hljs-keyword">if</span> (type == <span class="hljs-string">"email"</span>)
+        {
+            Console.WriteLine(<span class="hljs-string">$"Email: <span class="hljs-subst">{message}</span>"</span>);
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (type == <span class="hljs-string">"sms"</span>)
+        {
+            Console.WriteLine(<span class="hljs-string">$"SMS: <span class="hljs-subst">{message}</span>"</span>);
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (type == <span class="hljs-string">"slack"</span>) <span class="hljs-comment">// 追加のたびに変更が必要</span>
+        {
+            Console.WriteLine(<span class="hljs-string">$"Slack: <span class="hljs-subst">{message}</span>"</span>);
+        }
+    }
+}
+</div></code></pre>
+<h3 id="34-%E3%83%AA%E3%82%B9%E3%82%B3%E3%83%95%E3%81%AE%E7%BD%AE%E6%8F%9B%E5%8E%9F%E5%89%87lsp">3.4 リスコフの置換原則（LSP）</h3>
+<ul>
+<li>派生クラスは基底クラスとして置き換えても正しく動作すること</li>
+<li>実装クラスは、インターフェースや抽象クラスの契約（前提・動作・戻り値）を裏切らず、同じ期待値で使えるように設計すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ❌ 悪い例 : 呼び出し側は IMessageSender なのに例外で落ちる → LSP違反</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BrokenEmailSender</span> : <span class="hljs-title">IMessageSender</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Send</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> message</span>)</span>
+    {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NotSupportedException(<span class="hljs-string">"メール送信は未サポートです"</span>); <span class="hljs-comment">// ← 実装していない</span>
+    }
+}
+</div></code></pre>
+<h3 id="35-%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9%E5%88%86%E9%9B%A2%E5%8E%9F%E5%89%87isp">3.5 インターフェース分離原則（ISP）</h3>
+<ul>
+<li>特定の目的に応じたインターフェースを分割し、呼び出し元に不要な依存を強制しないこと。</li>
+<li>一つのインターフェースが多すぎる責務を持つと、実装クラスが不要なメソッドまで実装することになり、保守性が下がる。</li>
+<li>実装クラスが使わないメソッドに依存させられるような設計は避けること。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例 ： 目的別にインターフェースを分割</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IReadable</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">string</span> <span class="hljs-title">Read</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IWritable</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Write</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> content</span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReadOnlyFile</span> : <span class="hljs-title">IReadable</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> <span class="hljs-title">Read</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-string">"読み込み専用"</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFileHandler</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">string</span> <span class="hljs-title">Read</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Write</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> content</span>)</span>;
+}
+
+<span class="hljs-comment">// ❌ 悪い例 : 不必要な実装を強制する大きすぎるインターフェース</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReadOnlyFile</span> : <span class="hljs-title">IFileHandler</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> <span class="hljs-title">Read</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-string">"読み込み専用"</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> content</span>)</span>
+    {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NotSupportedException(<span class="hljs-string">"書き込みはサポートされていません"</span>);
+    }
+}
+</div></code></pre>
+<h2 id="4-%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E8%A8%AD%E8%A8%88">4 コントローラー設計</h2>
+<h3 id="41-%E5%90%84%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AF-1-%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AB%E8%B2%AC%E5%8B%99%E3%82%92%E9%99%90%E5%AE%9A%E3%81%99%E3%82%8B%E4%BE%8Busercontroller">4.1 各コントローラーは <strong>1</strong> ドメインに責務を限定する（例：UserController）</h3>
+<ul>
+<li><code>UserController</code> はユーザー管理に関するAPIエンドポイントのみを担当し、<code>ProjectController</code>や <code>AuthController</code>など、他の機能と混在させないこと</li>
+<li>コントローラー単位で機能が明確になり、役割の境界が把握しやすくする実装を心がける</li>
+</ul>
+<h3 id="42-restful-%E3%81%AA%E5%91%BD%E5%90%8D%E3%83%BBhttp-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E8%A8%AD%E8%A8%88%E3%82%92%E5%BE%B9%E5%BA%95%E3%81%99%E3%82%8B">4.2 RESTful な命名・HTTP メソッド設計を徹底する</h3>
+<ul>
+<li>
+<p>GET /api/users</p>
+</li>
+<li>
+<p>GET /api/users/{id}</p>
+</li>
+<li>
+<p>POST /api/users</p>
+</li>
+<li>
+<p>PUT /api/users/{id}</p>
+</li>
+<li>
+<p>DELETE /api/users/{id}</p>
+</li>
+</ul>
+<h3 id="43-%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%AF-actionresultt-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">4.3 戻り値は ActionResult<T> を使用する</h3>
+<ul>
+<li>API のエンドポイントでは、HTTP ステータスコードとレスポンスデータの両方を柔軟に制御できるようにするため、<br><code>ActionResult&lt;T&gt;</code> を戻り値とすることを原則とする。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例</span>
+[<span class="hljs-meta">HttpGet(<span class="hljs-meta-string">"{id}"</span>)</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;ActionResult&lt;UserDto&gt;&gt; GetUser(Guid id)
+{
+    <span class="hljs-keyword">var</span> user = <span class="hljs-keyword">await</span> _service.GetUserByIdAsync(id);
+    <span class="hljs-keyword">if</span> (user == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> NotFound();
+    <span class="hljs-keyword">return</span> Ok(user);
+}
+
+<span class="hljs-comment">// ❌ 悪い例</span>
+[<span class="hljs-meta">HttpGet(<span class="hljs-meta-string">"{id}"</span>)</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> UserDto <span class="hljs-title">GetUser</span>(<span class="hljs-params">Guid id</span>) <span class="hljs-comment">// 非同期でもない・戻り値も固定</span></span>
+{
+    <span class="hljs-keyword">return</span> _service.GetUserById(id);
+}
+</div></code></pre>
+<h3 id="44-%E9%9D%9E%E5%90%8C%E6%9C%9F%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%AB%E3%81%AF%E5%BF%85%E3%81%9A-async-taskt-%E3%82%92%E4%BD%BF%E3%81%86">4.4 非同期メソッドには必ず async Task<T> を使う</h3>
+<ul>
+<li>非同期で実行される処理（DB アクセス、外部 API 呼び出し、ファイル IO など）では、必ず <code>async</code> 修飾子と <code>Task&lt;T&gt;</code> を併用すること。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例</span>
+[<span class="hljs-meta">HttpPost</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;IActionResult&gt; <span class="hljs-title">CreateUserAsync</span>(<span class="hljs-params">CreateUserRequest request</span>)</span>
+{
+    <span class="hljs-keyword">await</span> _service.CreateUserAsync(request);
+    <span class="hljs-keyword">return</span> NoContent();
+}
+
+<span class="hljs-comment">// ❌ 悪い例</span>
+[<span class="hljs-meta">HttpPost</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">CreateUser</span>(<span class="hljs-params">CreateUserRequest request</span>) <span class="hljs-comment">// 同期的に処理している</span></span>
+{
+    _service.CreateUser(request);
+    <span class="hljs-keyword">return</span> NoContent();
+}
+</div></code></pre>
+<h3 id="45-http-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%B1%9E%E6%80%A7%E3%81%AF%E5%BF%85%E3%81%9A%E6%98%8E%E7%A4%BA%E7%9A%84%E3%81%AB%E8%A8%98%E8%BC%89%E3%81%99%E3%82%8B">4.5 HTTP メソッド属性は必ず明示的に記載する</h3>
+<ul>
+<li>コントローラーアクションには <code>[HttpGet]</code>, <code>[HttpPost]</code>, <code>[HttpPut]</code>, <code>[HttpDelete]</code> などの HTTP メソッド属性を省略せずに明示的に付与すること。</li>
+</ul>
+<h3 id="46-uri%E8%A8%AD%E8%A8%88%E3%81%AF%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E6%8C%87%E5%90%91%E3%82%92%E6%84%8F%E8%AD%98%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E5%8B%95%E8%A9%9E%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84">4.6  URI設計はリソース指向を意識すること（動詞を使わない）</h3>
+<ul>
+<li><code>POST /api/users/{id}/activate</code> ❌（動詞を含む）</li>
+<li><code>POST /api/users/{id}/activation</code> ✅（リソースとして設計）</li>
+</ul>
+<h2 id="5-http%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E8%A8%AD%E8%A8%88">5 HTTPステータスコードの設計</h2>
+<ul>
+<li>
+<p>開発者は下記の方針に従い適切にステータスコードを返す実装をすること</p>
+<ul>
+<li>
+<p><code>200</code> OK: 通常成功時</p>
+</li>
+<li>
+<p><code>201</code> Created: リソース作成成功</p>
+</li>
+<li>
+<p><code>204</code> No Content: 更新・削除成功</p>
+</li>
+<li>
+<p><code>400</code> Bad Request: 入力ミス</p>
+</li>
+<li>
+<p><code>401</code> Unauthorized: 認証されてない</p>
+</li>
+<li>
+<p><code>403</code> Forbidden: 権限がない</p>
+</li>
+<li>
+<p><code>404</code> Not Found: リソースが存在しない</p>
+</li>
+<li>
+<p><code>409</code> Conflict: 衝突（例：一意制約違反）</p>
+</li>
+<li>
+<p><code>500</code> Internal Server Error : アプリケーション内で予期しないエラー</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="51-200-ok-%E9%80%9A%E5%B8%B8%E6%88%90%E5%8A%9F%E6%99%82">5.1 <code>200 OK</code>: 通常成功時</h3>
+<ul>
+<li>
+<p><code>GET</code> リクエスト等でリソースを正常に取得できた場合に返す。</p>
+</li>
+<li>
+<p>レスポンスボディには取得されたリソース（DTO）、もしくはメッセージを含める。</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>[<span class="hljs-meta">HttpGet(<span class="hljs-meta-string">"{id}"</span>)</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;ActionResult&lt;UserDto&gt;&gt; GetUser(Guid id)
+{
+    <span class="hljs-keyword">var</span> user = <span class="hljs-keyword">await</span> _service.GetUserByIdAsync(id);
+    <span class="hljs-keyword">if</span> (user <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> NotFound();
+    <span class="hljs-keyword">return</span> Ok(user); 
+}
+</div></code></pre>
+<h3 id="52-201-created-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E4%BD%9C%E6%88%90%E6%88%90%E5%8A%9F%E6%99%82">5.2 <code>201 Created</code>: リソース作成成功時</h3>
+<ul>
+<li>
+<p><code>POST</code> リクエストでリソースが新規作成されたときは、必ず <code>CreatedAtAction</code> を使用して <code>201 Created</code> を返す。</p>
+</li>
+<li>
+<p><code>Location</code> ヘッダーに取得用URLを付け、レスポンスボディには作成済みのDTOを含める。</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>[<span class="hljs-meta">HttpPost</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;ActionResult&lt;UserDto&gt;&gt; CreateUserAsync(CreateUserRequest request)
+{
+    <span class="hljs-keyword">var</span> user = <span class="hljs-keyword">await</span> _service.CreateUserAsync(request);
+
+    <span class="hljs-keyword">return</span> CreatedAtAction(
+        <span class="hljs-keyword">nameof</span>(GetUser),
+        <span class="hljs-keyword">new</span> { id = user.Id },
+        user
+    );
+}
+
+```csharp
+[<span class="hljs-meta">HttpGet(<span class="hljs-meta-string">"{id}"</span>)</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;ActionResult&lt;UserDto&gt;&gt; GetUser(Guid id)
+{
+    <span class="hljs-keyword">var</span> user = <span class="hljs-keyword">await</span> _service.GetUserByIdAsync(id);
+    <span class="hljs-keyword">if</span> (user == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> NotFound();
+    <span class="hljs-keyword">return</span> Ok(user);
+}
+</div></code></pre>
+<h3 id="53-204-no-content-%E6%9B%B4%E6%96%B0%E3%83%BB%E5%89%8A%E9%99%A4%E6%88%90%E5%8A%9F%E3%83%AC%E3%82%B9%E3%83%9D%E3%83%B3%E3%82%B9%E3%83%9C%E3%83%87%E3%82%A3%E3%81%AA%E3%81%97">5.3 <code>204 No Content</code>: 更新・削除成功（レスポンスボディなし）</h3>
+<ul>
+<li>
+<p><code>PUT</code> や <code>DELETE</code> 成功時で、レスポンスボディが不要な場合に使用する。</p>
+</li>
+<li>
+<p>成功はしたが、返すデータが無いときに明確に表現するために使う。</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>[<span class="hljs-meta">HttpDelete(<span class="hljs-meta-string">"{id}"</span>)</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;IActionResult&gt; <span class="hljs-title">DeleteUser</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> id</span>)</span>
+{
+    <span class="hljs-keyword">var</span> success = <span class="hljs-keyword">await</span> _service.DeleteUserAsync(id);
+    <span class="hljs-keyword">if</span> (!success) <span class="hljs-keyword">return</span> NotFound();
+    <span class="hljs-keyword">return</span> NoContent();
+}
+</div></code></pre>
+<h3 id="54-400-bad-request-%E5%85%A5%E5%8A%9B%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%BB%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%A4%B1%E6%95%97">5.4 <code>400 Bad Request</code>: 入力エラー・バリデーション失敗</h3>
+<ul>
+<li>
+<p>クライアントのリクエストに構文的または意味的な誤りがある場合。</p>
+</li>
+<li>
+<p><code>ModelState</code> を利用し、バリデーションエラー時に返す。</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>[<span class="hljs-meta">HttpPost</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;IActionResult&gt; <span class="hljs-title">CreateUserAsync</span>(<span class="hljs-params">CreateUserRequest request</span>)</span>
+{
+    <span class="hljs-keyword">if</span> (!ModelState.IsValid)
+        <span class="hljs-keyword">return</span> BadRequest(ModelState);
+
+    <span class="hljs-keyword">await</span> _service.CreateUserAsync(request);
+    <span class="hljs-keyword">return</span> NoContent();
+}
+</div></code></pre>
+<h3 id="55-404-not-found-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%AA%E3%81%84">5.5 <code>404 Not Found</code>: リソースが存在しない</h3>
+<ul>
+<li>
+<p>指定されたIDなどに該当するリソースが存在しない場合に返す。</p>
+</li>
+<li>
+<p>存在チェックに失敗した場合、<code>null</code> のまま返すのではなく、必ず <code>NotFound()</code> を返すこと。</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> user = <span class="hljs-keyword">await</span> _service.GetUserByIdAsync(id);
+<span class="hljs-keyword">if</span> (user <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> NotFound();
+</div></code></pre>
+<h3 id="56-500-internal-server-error-%E4%BA%88%E6%9C%9F%E3%81%97%E3%81%AA%E3%81%84%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%A8%E3%83%A9%E3%83%BC">5.6 <code>500 Internal Server Error</code>: 予期しないサーバーエラー</h3>
+<ul>
+<li>
+<p>アプリケーション内部で未処理の例外やバグが発生したとき返す。</p>
+</li>
+<li>
+<p>通常は ExceptionFilter や Middleware で一括処理し、クライアントには曖昧なエラーメッセージのみ返すこと。</p>
+</li>
+</ul>
+<h2 id="6-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%BB%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E8%A8%AD%E8%A8%88">6 サービス・リポジトリ設計</h2>
+<h3 id="61-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E5%B1%A4%E3%81%AF%E6%A5%AD%E5%8B%99%E5%87%A6%E7%90%86%E3%81%AE%E3%81%BF%E3%82%92%E5%AE%9F%E8%A3%85">6.1 サービス層は業務処理のみを実装</h3>
+<ul>
+<li>アプリケーションの業務処理を実装すること</li>
+<li>コントローラーから直接 DB アクセスせず、サービスを介して処理を行うこと</li>
+<li>複数のリポジトリにまたがる処理、もしくは複数エンティティに対して一貫性を保証する必要がある場合は、<code>Unit of Work</code> パターンを実装する。</li>
+</ul>
+<h3 id="62-%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E5%B1%A4%E3%81%AF-db-%E3%81%B8%E3%81%AE%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D%E6%93%8D%E4%BD%9C%E3%81%AE%E3%81%BF%E3%82%92%E5%AE%9F%E8%A3%85">6.2 リポジトリ層は DB への読み書き操作のみを実装</h3>
+<ul>
+<li>
+<p>原則として、<code>Entity</code> と <code>Repository</code> は 1 対 1 の関係で設計すること</p>
+</li>
+<li>
+<p>CodeMaster などの読み取り専用の <code>Repository</code> は追加削除が可能な設計しないインターフェース設計をする</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ❌ 悪い例：保存用のインターフェースが実装されている</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ICodeMasterQueryRepository</span>
+{
+    Task&lt;CodeMaster?&gt; FindByCodeAsync(<span class="hljs-keyword">string</span> category, <span class="hljs-keyword">string</span> code);
+    Task&lt;List&lt;CodeMaster&gt;&gt; GetByCategoryAsync(<span class="hljs-keyword">string</span> category);
+    Task&lt;CodeMaster?&gt; AddAsync(<span class="hljs-keyword">string</span> category, <span class="hljs-keyword">string</span> code);
+}
+</div></code></pre>
+<ul>
+<li>サービス層からは <code>IUserRepository</code>などの抽象インターフェース経由で呼び出す。
+<ul>
+<li>依存性逆転の原則（DIP） を意識し、具象ではなく抽象に依存する。</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UserService</span> : <span class="hljs-title">IUserService</span>
+{
+    <span class="hljs-comment">// ❌ 悪い例：実態クラスを直接参照している</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> UserRepository _repository;
+    <span class="hljs-comment">// ✅ 良い例</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> IUserRepository _repository;
+}
+</div></code></pre>
+<h2 id="7-%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">7 バリデーション</h2>
+<h3 id="71-%E5%8D%98%E9%A0%85%E7%9B%AE%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">7.1 単項目バリデーション</h3>
+<ul>
+<li>原則として <a href="https://qiita.com/gushwell/items/266d208229697ea2ffc3"><strong><code>DataAnnotations</code></strong></a> を使用すること</li>
+<li>また、バリデーションメッセージは必ず <a href="https://learn.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files">リソースファイル</a>（<strong>Messages.resx</strong>）で管理すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例：リソースファイルを参照してメッセージを設定</span>
+[<span class="hljs-meta">Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.V10001))</span>]
+[<span class="hljs-meta">EmailAddress(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.V10003))</span>]
+[<span class="hljs-meta">StringLength(50, ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.V10002))</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Email { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+
+<span class="hljs-comment">// ❌ 悪い例：メッセージをべた書き</span>
+[<span class="hljs-meta">Required(ErrorMessage = <span class="hljs-meta-string">"メールアドレスは必須です"</span>)</span>]
+[<span class="hljs-meta">EmailAddress(ErrorMessage = <span class="hljs-meta-string">"メールアドレスの形式が正しくありません"</span>)</span>]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Email { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+
+<span class="hljs-comment">// ❌ 悪い例：処理の中で手動でコントローラー内でバリデーションしている</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">string</span>.IsNullOrEmpty(request.Email)) <span class="hljs-comment">// ← NG: 手動チェックは冗長</span>
+    <span class="hljs-keyword">return</span> BadRequest(<span class="hljs-string">"メールアドレスは必須です"</span>);
+</div></code></pre>
+<h3 id="72-%E6%A5%AD%E5%8B%99%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">7.2 業務バリデーション</h3>
+<ul>
+<li>複数項目間の相関チェックや、DB との突合、ユニーク制約など、ビジネスルールに基づく検証は業務バリデーションとしてサービス層で行うこと</li>
+<li>バリデーションエラーの場合は、<code>BadRequest</code> として <code>400</code> エラーを返すこと、またレスポンスの形式は PRJ で単項目バリデーションと統一すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> _userRepository.ExistsByEmailAsync(request.Email))
+        <span class="hljs-keyword">return</span> BadRequest(ApiValidationError.Create(Messages.E10001));
+</div></code></pre>
+<h2 id="8-%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0">8 エラーハンドリング</h2>
+<h3 id="81-throw-%E3%81%AE%E4%BD%BF%E7%94%A8%E8%A6%8F%E7%B4%84">8.1 throw の使用規約</h3>
+<ul>
+<li>原則として、例外をスローする状況は 防ぐべき異常状態が発生し、それが明示的にハンドリングされるべき場合に限定する。</li>
+<li>通常の処理フローで発生し得る「想定内の条件分岐」は、<code>if</code> 文や <code>TryXX</code> パターンで対応し、<code>throw</code> を避ける。</li>
+<li><strong>外部サービスとの通信エラーや、システムの状態として致命的な失敗</strong>（DB 接続失敗など）は <code>throw</code> 対象となる。</li>
+<li>例外をスローするときは、必ず 意味のある独自例外（例：<code>BusinessException</code>、<code>NotFoundException</code>） を使用する。</li>
+<li>.NET の組み込み例外（例：<code>InvalidOperationException</code> や <code>ArgumentNullException</code>）は、システムの誤使用時のみに限定する。</li>
+</ul>
+<h4 id="%E2%9C%85-throw-%E3%81%8C%E8%A8%B1%E5%AE%B9%E3%81%95%E3%82%8C%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9">✅ throw が許容されるケース</h4>
+<ul>
+<li>外部サービスとの通信に失敗し、再試行やフォールバックが必要な場合</li>
+<li>想定されないシステム異常や予期せぬ例外（ただし <code>ExceptionFilter</code> や <code>Middleware</code> で捕捉・共通ハンドリング）</li>
+</ul>
+<h4 id="%E2%9D%8C-throw-%E3%82%92%E9%81%BF%E3%81%91%E3%82%8B%E3%81%B9%E3%81%8D%E3%82%B1%E3%83%BC%E3%82%B9">❌ throw を避けるべきケース</h4>
+<ul>
+<li>正常系の一部として「失敗時に <code>throw</code>」を使う（例：メール未登録 → エラーではなく <code>null</code> や <code>TryGet</code>）</li>
+<li>単なる条件チェック（例：<code>if (x == null) throw</code>）で済む処理 → 事前検証・ガード節で対応</li>
+</ul>
+<h2 id="9-%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC">9 フィルター</h2>
+<h3 id="91-%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC%E3%81%AE%E4%BD%BF%E7%94%A8%E8%A6%8F%E7%B4%84">9.1 フィルターの使用規約</h3>
+<ul>
+<li>共通的な処理（例：例外処理、ログ記録、バリデーションエラーの整形など）は、<a href="https://learn.microsoft.com/ja-jp/aspnet/mvc/overview/older-versions-1/controllers-and-routing/understanding-action-filters-cs?source=recommendations"><code>ActionFilter</code></a> または <a href="https://learn.microsoft.com/ja-jp/aspnet/core/mvc/controllers/filters?view=aspnetcore-9.0"><code>ExceptionFilter</code></a> に分離して記述すること。</li>
+<li>コントローラー内で重複する前処理／後処理は極力フィルターに切り出すことで、責務分離と再利用性を高める。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//✅ 良い例：例外処理を ExceptionFilter に切り出している</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ApiExceptionFilter</span> : <span class="hljs-title">IExceptionFilter</span>
+{
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnException</span>(<span class="hljs-params">ExceptionContext context</span>)</span>
+  {
+      context.Result = <span class="hljs-keyword">new</span> ObjectResult(<span class="hljs-keyword">new</span> ApiError
+      {
+          Message = <span class="hljs-string">"サーバーエラー"</span>,
+      }) { StatusCode = <span class="hljs-number">500</span> };
+      context.ExceptionHandled = <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">await</span> mailService.SendAsync(context.Exception);
+  }
+}
+
+<span class="hljs-comment">// ❌ 悪い例：全コントローラーに try-catch をベタ書きしている</span>
+[<span class="hljs-meta">HttpPost</span>]
+<span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">CreateUser</span>(<span class="hljs-params">CreateUserRequest req</span>)</span>
+{
+    <span class="hljs-keyword">try</span>
+    {
+        _userService.CreateUser(req);
+        <span class="hljs-keyword">return</span> Ok();
+    }
+    <span class="hljs-keyword">catch</span> (Exception ex)
+    {
+        _logger.LogError(ex, <span class="hljs-string">"エラー発生"</span>);
+        <span class="hljs-keyword">return</span> StatusCode(<span class="hljs-number">500</span>, <span class="hljs-string">"エラーが発生しました"</span>);
+    }
+}
+</div></code></pre>
+<h2 id="10-%E5%85%B1%E9%80%9A%E3%83%A6%E3%83%BC%E3%83%86%E3%82%A3%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AF%E3%83%A9%E3%82%B9commons--helper">10 共通ユーティリティクラス（Commons / Helper）</h2>
+<ul>
+<li>静的メソッドとして実装すること。</li>
+<li>拡張メソッド を使用する場合は、[型名]<code>Extensions</code> の命名規則を用いる。</li>
+<li>複雑なロジックや外部依存を含む場合はインスタンス化可能な Service とすること</li>
+</ul>
+<h3 id="101-commons">10.1 Commons</h3>
+<ul>
+<li>汎用的かつドメイン非依存なロジックをまとめたライブラリ層。</li>
+<li>日付操作や変換など、あらゆる層で再利用される関数を実装すること。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//✅ 良い例：汎用的かつドメイン非依存なロジック</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToJapaneseDate</span>(<span class="hljs-params"><span class="hljs-keyword">this</span> DateTime date</span>)</span>
+  =&gt; date.ToString(<span class="hljs-string">"yyyy年MM月dd日"</span>);
+
+<span class="hljs-comment">// ❌ 悪い例：ログ出力処理（外部依存を持ち込まない）</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">LogUsage</span>(<span class="hljs-params">DateTime time</span>)</span>
+{
+  Console.WriteLine(<span class="hljs-string">$"使われました: <span class="hljs-subst">{time}</span>"</span>);
+}
+</div></code></pre>
+<h3 id="102-helper">10.2 Helper</h3>
+<ul>
+<li>用途が明確な、特定の操作に特化した補助的関数群。状態を持たず、基本的には静的クラスと静的メソッドで構成されること。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//✅ 良い例：明確な機能単位（Email操作）</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">string</span> <span class="hljs-title">Normalize</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> email</span>)</span>
+  =&gt; email.Trim().ToLowerInvariant();
+
+<span class="hljs-comment">// ❌ 悪い例：汎用的すぎるため Commons に移動すべき</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">string</span> <span class="hljs-title">FormatDate</span>(<span class="hljs-params">DateTime date</span>)</span>
+  =&gt; date.ToString(<span class="hljs-string">"yyyy/MM/dd"</span>);
+</div></code></pre>
+<h2 id="11-%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2%E3%83%BB%E5%88%B6%E9%99%90%E4%BA%8B%E9%A0%85%E7%A6%81%E6%AD%A2%E7%B3%BB%E8%A6%8F%E7%B4%84">11 使用禁止・制限事項（禁止系規約）</h2>
+<h3 id="111-linq-%E3%82%AF%E3%82%A8%E3%83%AA%E5%86%85%E3%81%A7%E3%81%AE-datetimenow-%E3%81%AE%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2">11.1 Linq クエリ内での <code>DateTime.Now</code> の直接使用禁止</h3>
+<ul>
+<li><code>LINQ to Entities</code>（EF Core 等）では <code>DateTime.Now</code> は <code>GETDATE()</code>として扱われ、DB 側のタイムゾーンで実行されるため、必ず <code>Linq</code> クエリの外で変数に格納して使用すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//✅ 良い例：変数に格納して使用</span>
+<span class="hljs-keyword">var</span> datetime = DateTime.Now;
+<span class="hljs-keyword">var</span> users = dbContext.Users.Where(u =&gt; u.CreatedAt &gt;= datetime);
+
+<span class="hljs-comment">// ❌ 悪い例：直接使用</span>
+<span class="hljs-keyword">var</span> users = dbContext.Users.Where(u =&gt; u.CreatedAt &gt;= DateTime.Now);
+</div></code></pre>
+<ul>
+<li>PRJ によっては静的解析ツールなどを使用して <code>DateTime.Now</code> の使用そのものを禁止にすることも検討すること</li>
+</ul>
+<h3 id="112-asenumerable-%E3%81%AE%E4%BD%BF%E7%94%A8%E3%82%92%E5%8E%9F%E5%89%87%E7%A6%81%E6%AD%A2%E3%81%A8%E3%81%99%E3%82%8B">11.2 <code>AsEnumerable()</code> の使用を原則禁止とする</h3>
+<ul>
+<li>IQueryable → IEnumerable に切り替えることで、クエリ評価がDBからメモリに切り替わり、パフォーマンス・メモリに悪影響を与えるため原則禁止とする。</li>
+<li>DBで処理可能な形に変換する or 関数をSQLにマッピングすることが理想的</li>
+<li>蒸気を踏まえて、それでもやむを得ず使用する場合は、明示的なコメントとコードレビュー承認が必要。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ❌ 全件ロードされ、Whereがメモリ上で実行される</span>
+<span class="hljs-comment">// MyLocalFunctionがSQL側で評価できないため AsEnumerable() を使用して意図的にメモリ上で実行している</span>
+<span class="hljs-keyword">var</span> users = dbContext.Users
+    .AsEnumerable()
+    .Where(u =&gt; MyLocalFunction(u))
+    .ToList();
+</div></code></pre>
+<h3 id="113-dynamic-%E3%81%AE%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2">11.3 <code>dynamic</code> の使用禁止</h3>
+<ul>
+<li><code>dynamic</code> は 型安全を破壊するため、原則使用禁止。</li>
+<li>特別な理由（リフレクション、COM相互運用、JSON柔軟解析など）がある場合のみ、明示的なコメントとコードレビュー承認が必要。</li>
+</ul>
+<h3 id="114-object-%E3%81%AE%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%E9%81%8B%E7%94%A8%E3%81%AE%E7%A6%81%E6%AD%A2">11.4 <code>object</code> のキャスト運用の禁止</h3>
+<ul>
+<li><code>object</code> 型への変換やボックス化 → アンボックス化は パフォーマンス低下とバグの温床のため <strong>原則全面禁止</strong>。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ❌ ジェネリクスや型安全な構造体で置き換えるべき</span>
+<span class="hljs-keyword">object</span> val = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">int</span> num = (<span class="hljs-keyword">int</span>)val; 
+</div></code></pre>
+<h3 id="115-async-void-%E3%81%AE%E7%A6%81%E6%AD%A2">11.5 <code>async void</code> の禁止</h3>
+<ul>
+<li>async void は例外が非検知になるため<strong>使用禁止</strong></li>
+</ul>
+<h3 id="116-throw-ex-%E3%81%AE%E7%A6%81%E6%AD%A2%E4%BE%8B%E5%A4%96%E3%81%AE%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B9%E7%A0%B4%E6%A3%84">11.6 <code>throw ex;</code> の禁止（例外のスタックトレース破棄）</h3>
+<ul>
+<li>
+<p><code>throw ex;</code> は例外の 元のスタックトレースを失うため禁止。</p>
+</li>
+<li>
+<p><code>throw;</code> を使用してスタックトレースを保持すること。</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例 </span>
+<span class="hljs-keyword">catch</span> (Exception ex) <span class="hljs-keyword">throw</span>;
+
+<span class="hljs-comment">// ❌ 悪い例 :スタックトレースが失われる</span>
+<span class="hljs-keyword">catch</span> (Exception ex) <span class="hljs-keyword">throw</span> ex;
+</div></code></pre>
+<h3 id="117-catchexception-%E3%81%AE%E6%BF%AB%E7%94%A8%E7%A6%81%E6%AD%A2">11.7 <code>catch(Exception)</code> の濫用禁止</h3>
+<ul>
+<li><code>Exception</code> を丸ごとキャッチして握りつぶすのは<strong>禁止</strong></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例 ：ログ＋再スロー</span>
+<span class="hljs-keyword">try</span> { ... } <span class="hljs-keyword">catch</span> (Exception ex) { logger.LogError(ex); <span class="hljs-keyword">throw</span>; }
+
+<span class="hljs-comment">// ❌ 悪い例 :何もせず握りつぶす</span>
+<span class="hljs-keyword">try</span> { ... } <span class="hljs-keyword">catch</span> (Exception) { }
+</div></code></pre>
+<h3 id="118-tolist%E3%81%AF%E5%BF%85%E8%A6%81%E3%81%AA%E6%99%82%E3%81%A0%E3%81%91%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B">11.8 <code>ToList()</code>は必要な時だけ使用する。</h3>
+<ul>
+<li><code>ToList()</code> を使うのは「必要なときだけ」に限定し、<code>IEnumerable</code> の遅延評価を使用すること</li>
+<li>明確な理由がない限り、パフォーマンスとメモリ効率を考慮してコレクションの中間状態で <code>ToList()</code> を挟まない</li>
+<li></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例 : 最終的に一覧として評価する必要がある場合</span>
+<span class="hljs-keyword">var</span> sortedUsers = users
+    .Where(u =&gt; u.IsActive)
+    .OrderBy(u =&gt; u.Name)
+    .ToList(); <span class="hljs-comment">// 最終出力のため評価が必要</span>
+
+<span class="hljs-comment">// ✅ 良い例 : List特有の機能（Count, Index, Addなど）を使うとき</span>
+<span class="hljs-keyword">var</span> list = items.Where(x =&gt; x.IsValid).ToList();
+list.Add(extraItem);
+
+
+<span class="hljs-comment">// ❌ 悪い例 : 無意味に中間で ToList() を使う</span>
+<span class="hljs-comment">// LINQチェーンの途中で .ToList() を挟むとパフォーマンスとメモリ効率が低下する</span>
+<span class="hljs-keyword">var</span> activeUsers = users.Where(u =&gt; u.IsActive).ToList();
+<span class="hljs-keyword">var</span> sorted = activeUsers.OrderBy(u =&gt; u.Name).ToList();
+
+<span class="hljs-comment">// ❌ 悪い例 : foreach のためだけに ToList() を呼ぶ。IEnumerable のままでよい。</span>
+<span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> user <span class="hljs-keyword">in</span> users.Where(u =&gt; u.IsActive).ToList()) <span class="hljs-comment">// ← 不要な変換</span>
+{
+    Console.WriteLine(user.Name);
+}
+
+<span class="hljs-comment">// ❌ 悪い例 : 同じクエリを ToList() で複数回評価している</span>
+<span class="hljs-keyword">var</span> validUsers = users.Where(u =&gt; u.IsValid);
+<span class="hljs-keyword">var</span> count = validUsers.ToList().Count;     <span class="hljs-comment">// 評価①</span>
+<span class="hljs-keyword">var</span> last = validUsers.ToList().Last();     <span class="hljs-comment">// 評価②（再評価される）</span>
+</div></code></pre>
+<h3 id="119-thread-%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2">11.9 <code>Thread</code> クラスの直接使用禁止</h3>
+<ul>
+<li><code>Thread</code> の直接使用は、ThreadPool を無視した非効率なスレッド生成となるため<strong>禁止</strong></li>
+<li>Task.Run, BackgroundService, IHostedService など .NET Core に適した非同期モデルを使用すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例</span>
+<span class="hljs-keyword">await</span> Task.Run(() =&gt; DoWork());
+
+<span class="hljs-comment">// ❌ 悪い例</span>
+<span class="hljs-keyword">var</span> thread = <span class="hljs-keyword">new</span> Thread(() =&gt; { DoWork(); });
+thread.Start();
+</div></code></pre>
+<h3 id="1110-%E6%B7%B1%E3%81%99%E3%81%8E%E3%82%8B%E3%83%8D%E3%82%B9%E3%83%88%E3%81%AE%E7%A6%81%E6%AD%A2">11.10 深すぎるネストの禁止</h3>
+<ul>
+<li><code>if</code>, <code>else if</code>, <code>else</code>, <code>switch</code>, <code>for</code>, <code>foreach</code>, <code>while</code>, <code>try-catch-finally</code> などのネストの深さは 2段階までに制限する。</li>
+<li>3段階以上のネストが発生する場合は、以下の方法で必ずフラット化・分離すること
+<ul>
+<li>メソッド分離</li>
+<li><code>switch</code> 式 / パターンマッチ への変換</li>
+<li>早期 <code>return</code> の導入</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例：ロジックを分離</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">HandleUser</span>(<span class="hljs-params">User user</span>)</span>
+{
+    <span class="hljs-keyword">if</span> (!CanBeProcessed(user)) <span class="hljs-keyword">return</span>;
+    ProcessUser(user);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">CanBeProcessed</span>(<span class="hljs-params">User user</span>)</span>
+{
+    <span class="hljs-keyword">return</span> user <span class="hljs-keyword">is</span> not <span class="hljs-literal">null</span> &amp;&amp; user.IsActive &amp;&amp; !user.IsLocked;
+}
+
+
+<span class="hljs-comment">// ❌ 悪い例：ネストが深くて読みづらい</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">HandleUser</span>(<span class="hljs-params">User user</span>)</span>
+{
+    <span class="hljs-keyword">if</span> (user != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-keyword">if</span> (user.IsActive)
+        {
+            <span class="hljs-keyword">if</span> (!user.IsLocked)
+            {
+                ProcessUser(user);
+            }
+        }
+    }
+}
+</div></code></pre>
+<h3 id="1111-if-condition-return-else-return-%E3%81%AE%E7%A6%81%E6%AD%A2">11.11 <code>if (condition) return; else return;</code> の禁止</h3>
+<ul>
+<li>無意味な else は削除し、シンプルな制御構造にすること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例</span>
+<span class="hljs-keyword">return</span> condition;
+
+<span class="hljs-comment">// ❌ 悪い例</span>
+<span class="hljs-keyword">if</span> (condition)
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+</div></code></pre>
+<h3 id="1112-if-x--true--if-x--false-%E3%81%AE%E7%A6%81%E6%AD%A2">11.12 <code>if (x == true)</code> / <code>if (x == false)</code> の禁止</h3>
+<ul>
+<li>bool 型の値を比較で評価するのは冗長、真偽値はそのまま評価すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例</span>
+<span class="hljs-keyword">if</span> (isValid) { ... }
+<span class="hljs-keyword">if</span> (!isLocked) { ... }
+
+<span class="hljs-comment">// ❌ 悪い例</span>
+<span class="hljs-keyword">if</span> (isValid == <span class="hljs-literal">true</span>) { ... }
+<span class="hljs-keyword">if</span> (isLocked == <span class="hljs-literal">false</span>) { ... }
+</div></code></pre>
+<h3 id="1113-%E6%A4%9C%E7%B4%A2%E7%B3%BB%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%A7%E5%85%A8%E4%BB%B6db%E3%81%8B%E3%82%89%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E7%A6%81%E6%AD%A2">11.13 検索系クエリで全件DBから取得することの禁止</h3>
+<ul>
+<li>ページング処理などで大量データが検索対象の場合を表示すべき範囲だけを取得すること。</li>
+<li>クライアント側やメモリ上での後フィルタリング、全件取得 (<code>.ToList()</code> → <code>.Skip().Take()</code>) は パフォーマンス劣化・帯域浪費の原因となるため禁止</li>
+<li><code>.Skip().Take()</code> は DBクエリの中（<code>IQueryable</code>）で使い、DBレベルで正しく <code>OFFSET</code> / <code>FETCH</code> されるようにする。</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ❌ 悪い例 : 全件を取得し、アプリケーション側でページング</span>
+<span class="hljs-keyword">var</span> allUsers = dbContext.Users.ToList();
+<span class="hljs-keyword">var</span> page = allUsers.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+
+<span class="hljs-comment">// ✅ 良い例 : IQueryable のまま Skip/Take を適用し、DBで最小限のデータだけを取得</span>
+<span class="hljs-keyword">var</span> page = dbContext.Users
+    .Where(u =&gt; u.IsActive)
+    .OrderBy(u =&gt; u.Name)
+    .Skip(pageIndex * pageSize)
+    .Take(pageSize)
+    .ToList();
+</div></code></pre>
+<h4 id="%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85">注意事項</h4>
+<ul>
+<li><code>IEnumerable</code> に評価された時点でメモリ上に展開されるため、<code>IQueryable</code> の状態でページングを完了させることが必須</li>
+</ul>
+<h3 id="1114-include-%E3%81%AE%E5%A4%9A%E7%94%A8%E3%83%BB%E8%AA%A4%E7%94%A8%E7%A6%81%E6%AD%A2">11.14 <code>Include()</code> の多用・誤用禁止</h3>
+<ul>
+<li>多重連結や複雑な関連の <code>N+1</code> 問題 を招きやすい</li>
+<li>可能であれば <code>Select</code> で必要データだけを取得する</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 必要なデータだけ Projection</span>
+<span class="hljs-keyword">var</span> userSummaries = dbContext.Users
+    .Select(u =&gt; <span class="hljs-keyword">new</span> {
+        u.Name,
+        OrderCount = u.Orders.Count
+    })
+    .ToList();
+
+<span class="hljs-comment">// ❌ Includeの乱用</span>
+<span class="hljs-keyword">var</span> users = dbContext.Users.Include(u =&gt; u.Orders).ToList();
+</div></code></pre>
+<h3 id="1115-null-%E8%A8%B1%E5%AE%B9%E5%9E%8B%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B-null%E8%A8%B1%E5%8F%AF%E6%BC%94%E7%AE%97%E5%AD%90%E3%81%AE%E5%8E%9F%E5%89%87%E4%BD%BF%E7%94%A8%E7%A6%81%E6%AD%A2">11.15 <code>null</code> 許容型に対する <code>!</code>（null許可演算子）の原則使用禁止</h3>
+<ul>
+<li>使用した場合、将来の <code>NullReferenceException</code> の原因となるため、<code>!</code> を使わず、正しく初期化・検証することで null 安全性を保つこと</li>
+<li><code>null</code> チェックはコード上で明示的に記述し、正しい初期化、検証、例外スローで安全性を担保すること</li>
+<li>ビジネスロジック上 <code>null</code> とならない場合は根本の設計を見直し修正すること</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// ✅ 良い例 : null チェックを明示的に行う</span>
+<span class="hljs-keyword">string</span>? name = GetName();
+<span class="hljs-keyword">if</span> (name <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>) name = <span class="hljs-string">"test"</span>; <span class="hljs-comment">// ← コード上で null 想定して補完すること</span>
+Console.WriteLine(name.Length);
+
+<span class="hljs-comment">// ❌ 悪い例：null許容を抑制して実行時エラーを誘発</span>
+<span class="hljs-keyword">string</span>? name = GetName();
+Console.WriteLine(name!.Length);
+</div></code></pre>
+
+</body>
+</html>
